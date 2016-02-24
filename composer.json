@@ -1,0 +1,27 @@
+{
+    "name": "yplam/php-nudity",
+    "description": "A PHP implementation of a nudity scanner based on approaches from research papers.",
+    "keywords": ["nudity"],
+    "homepage": "https://github.com/yplam/php-nudity",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "YPLam",
+            "email": "yplam@yplam.com",
+            "homepage": "https://yplam.com/"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "imagine/Imagine": "~0.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+    "autoload": {
+        "psr-4" : {
+            "YPL\\Nudity\\" : "src/"
+        }
+    }
+}
