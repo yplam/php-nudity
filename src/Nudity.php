@@ -36,7 +36,6 @@ class Nudity
 
     public function detect(ImageInterface $image)
     {
-        $image = $this->imagine->open($filepath);
         $thumbnail = $image->thumbnail($this->maxSize);
         $imageSize = $thumbnail->getSize();
         $width = $imageSize->getWidth();
