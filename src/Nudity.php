@@ -40,31 +40,37 @@ class Nudity
         $imageSize = $thumbnail->getSize();
         $width = $imageSize->getWidth();
         $height = $imageSize->getHeight();
-        $skinMap = array_fill(0, $width, array_fill(0, $height, 0));
+
         $white = 250;
         $black = 5;
         $total = 0;
         $count = 0;
+
         for($x=0; $x<$width; $x++){
             for($y=0; $y<$height; $y++){
                 $color = $thumbnail->getColorAt(new Point($x, $y));
+
                 $r = $color->getRed();
                 $g = $color->getGreen();
                 $b = $color->getBlue();
+
                 if((($r > $white) && ($g > $white) && ($b > $white)) ||
                     (($r < $black) && ($g < $black) && ($b < $black))) 
                     continue;
+
                 //$Y = 16 + 0.2568*$r + 0.5041*$g + 0.0979*$b;
                 $Cb = 128 - 0.1482*$r - 0.291*$g + 0.4392*$b;
                 $Cr = 128 + (0.4392 * $r) + (-0.3678 * $g) + (-0.0714 * $b);
+
                 if(($Cb >= 80) && ($Cb <= 120) && ($Cr >= 133) && ($Cr <= 173)){
-                    $skinMap[$x][$y] = 1;
                     $count++;
                 }
                 $total++;
             }
         }
+
         $this->dump(($count / $total));
+        
         if(($count / $total) < $this->threshold){
             return false;
         }
