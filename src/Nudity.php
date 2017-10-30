@@ -11,7 +11,7 @@
 
 namespace YPL\Nudity;
 
-use Imagine\Image;
+use Imagine\Image\ImageInterface;
 use Imagine\Image\Box;
 use Imagine\Image\Point;
 
@@ -34,7 +34,7 @@ class Nudity
         $this->debug = isset($options['debug']) ? $options['debug'] : false;
     }
 
-    public function detect(Image $image)
+    public function detect(ImageInterface $image)
     {
         $image = $this->imagine->open($filepath);
         $thumbnail = $image->thumbnail($this->maxSize);
