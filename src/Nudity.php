@@ -11,7 +11,7 @@
 
 namespace YPL\Nudity;
 
-use Imagine\Image\ImagineInterface;
+use Imagine\Image;
 use Imagine\Image\Box;
 use Imagine\Image\Point;
 
@@ -25,10 +25,8 @@ class Nudity
 
     protected $debug;
 
-    public function __construct(ImagineInterface $imagine, array $options=array())
+    public function __construct(array $options=array())
     {
-        $this->imagine = $imagine;
-
         $this->threshold = isset($options['threshold']) ? $options['threshold'] : 0.15;
         $maxWidth = isset($options['maxWidth']) ? (int)$options['maxWidth'] : 640;
         $maxHeight = isset($options['maxHeight']) ? (int)$options['maxHeight'] : 480;
@@ -36,7 +34,7 @@ class Nudity
         $this->debug = isset($options['debug']) ? $options['debug'] : false;
     }
 
-    public function detect($filepath)
+    public function detect(Image $image)
     {
         $image = $this->imagine->open($filepath);
         $thumbnail = $image->thumbnail($this->maxSize);
