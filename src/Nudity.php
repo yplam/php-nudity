@@ -14,6 +14,7 @@ namespace YPL\Nudity;
 use Imagine\Image\ImageInterface;
 use Imagine\Image\Box;
 use Imagine\Image\Point;
+use Imagine\Image\Palette\RGB;
 
 class Nudity 
 {
@@ -45,6 +46,9 @@ class Nudity
         $black = 5;
         $total = 0;
         $count = 0;
+
+        if (!($thumbnail->palette() instanceof RGB))
+            $thumbnail->usePalette(new RGB());
 
         for($x=0; $x<$width; $x++){
             for($y=0; $y<$height; $y++){
