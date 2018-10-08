@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "imagine/Imagine": "~0.5"
+        "imagine/Imagine": "0.5 - 1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*"

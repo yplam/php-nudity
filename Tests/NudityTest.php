@@ -9,18 +9,20 @@ class NudityTest extends \PHPUnit_Framework_TestCase
     function testNudity()
     {
         $imagine = new Imagine();
-        $nudity = new Nudity($imagine, array('debug'=>true));
+        $nudity = new Nudity(array('debug'=>true));
         
-        $yesFiles = array_diff(scandir(__DIR__.'/img/yes'), array('..', '.'));
+        $yesFiles = glob(__DIR__.'/img/yes/*.jpg');
         if(!empty($yesFiles)){
             foreach($yesFiles as $file){
-                $this->assertTrue($nudity->detect(__DIR__.'/img/yes/'.$file));
+                $image = $imagine->open($file);
+                $this->assertTrue($nudity->detect($image));
             }
         }
-        $noFiles = array_diff(scandir(__DIR__.'/img/no'), array('..', '.'));
+        $noFiles = glob(__DIR__.'/img/no/*.jpg');
         if(!empty($noFiles)){
             foreach($noFiles as $file){
-                $this->assertFalse($nudity->detect(__DIR__.'/img/no/'.$file));
+                $image = $imagine->open($file);
+                $this->assertFalse($nudity->detect($image));
             }
         }
 
